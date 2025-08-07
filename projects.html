@@ -1,66 +1,126 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Projects - Editorial by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<head>
+    <title>Projects - Shahzeb Ali</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+        #search-bar {
+            margin: 20px 0;
+        }
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+        #searchInput {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+        .project-hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="is-preload">
 
-							<!-- Header -->
-								<header id="header">
-									<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
-								</header>
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-							<!-- Content -->
-								<section>
-									<header class="main">
-										<h1>Projects</h1>
-									</header>
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
 
-									<p>Welcome to the Projects section. Here you'll find an overview of all the projects I've worked on. Sub-tabs for individual projects will be added soon.</p>
+                <!-- Header -->
+                <header id="header">
+                    <a href="index.html" class="logo"><strong>Shahzeb Ali</strong> Portfolio</a>
+                </header>
 
-								</section>
+                <!-- Content -->
+                <section>
+                    <header class="main">
+                        <h1>Projects</h1>
+                    </header>
 
-						</div>
-					</div>
+                    <p>Here is a list of my data science and machine learning projects. You can search below or click on a project to view more details.</p>
 
-				<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
+                    <!-- Search Bar -->
+                    <div id="search-bar">
+                        <input type="text" id="searchInput" placeholder="Search projects by keyword, topic, or title...">
+                    </div>
 
-							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Menu</h2>
-									</header>
-									<ul>
-										<li><a href="index.html">Home</a></li>
-										<li><a href="projects.html">Projects</a></li>
-										<li><a href="resume.html">Resume</a></li>
-										<li><a href="contact.html">Contact</a></li>
-									</ul>
-								</nav>
+                    <!-- Project Cards -->
+                    <div class="posts" id="projectList">
 
-						</div>
-					</div>
+                        <!-- Lending Club Project -->
+                        <article class="project-card">
+                            <a href="finance-projects/lending-project/index.html" class="image">
+                                <img src="images/lending.png" alt="Lending Club Project Thumbnail" />
+                            </a>
+                            <h3>Lending Club Loan Prediction</h3>
+                            <p>Using a neural network to predict loan status (fully paid vs. charged off) based on Lending Club borrower data. Includes preprocessing, training, and model evaluation.</p>
+                            <ul class="actions">
+                                <li><a href="finance-projects/lending-project/index.html" class="button">Read More</a></li>
+                            </ul>
+                        </article>
 
-			</div>
+                    </div>
+                </section>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+            </div>
+        </div>
 
-	</body>
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <div class="inner">
+
+                <!-- Menu -->
+                <nav id="menu">
+                    <header class="major">
+                        <h2>Menu</h2>
+                    </header>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="resume.html">Resume</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Footer -->
+                <footer id="footer">
+                    <p class="copyright">&copy; Shahzeb Ali. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+                </footer>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- Search Functionality -->
+    <script>
+        document.getElementById("searchInput").addEventListener("keyup", function () {
+            var filter = this.value.toLowerCase();
+            var cards = document.querySelectorAll("#projectList .project-card");
+
+            cards.forEach(function (card) {
+                var text = card.innerText.toLowerCase();
+                if (text.includes(filter)) {
+                    card.classList.remove("project-hidden");
+                } else {
+                    card.classList.add("project-hidden");
+                }
+            });
+        });
+    </script>
+
+</body>
 </html>
