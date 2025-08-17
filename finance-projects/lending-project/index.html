@@ -29,12 +29,12 @@
                 <!-- Project Summary (with Challenges & Insights inside) -->
                 <section>
                     <header class="main">
-                        <h2>1) Project Summary</h2>
+                        <h2> Project Summary</h2>
                     </header>
 
                     <p>
-                        This project applies a neural network to predict loan repayment outcomes 
-                        (<strong>Paid, Current, Risky</strong>) using real LendingClub data. 
+                        This project applies a neural network to predict loan payment outcomes 
+                        (<strong>Paid, Current, Risky</strong>) using  LendingClub data. 
                         The pipeline includes data preprocessing, custom feature engineering, and class-imbalance handling 
                         with weighted loss functions. The model was trained and evaluated in PyTorch, achieving 
                         <strong>~96% overall accuracy</strong> and a <strong>macro F1-score of ~0.94</strong>, 
@@ -42,10 +42,10 @@
                     </p>
 
                     <p>
-                        To further improve performance, I integrated <strong>Optuna</strong>, an automated 
+                        To further improve performance, we integrated <strong>Optuna</strong>, an automated 
                         hyperparameter optimization framework. By tuning learning rate, dropout, batch size, 
                         optimizer choice, weight decay, and hidden width, the model achieved more balanced results 
-                        across all three classes, particularly boosting the <em>Risky</em> category.
+                        across all three classes.
                     </p>
 
                     <ul class="actions">
@@ -56,7 +56,7 @@
                     <h3>Challenges and Insights</h3>
 
                     <p>
-                        Throughout the development of this credit risk classification model, several challenges arose that required creative problem-solving and iterative refinement:
+                        Throughout the development of this credit risk classification model, several challenges arose e.g.,
                     </p>
 
                     <ul>
@@ -64,7 +64,7 @@
                             <strong>Class Imbalance in Delinquent Loans:</strong> Initially, a 4-class model 
                             (Paid, Current, Delinquent, Charged Off/Default) struggled with the Delinquent class (~1.5% of data), 
                             achieving a low F1-score of ~0.15. By merging Delinquent with Charged Off/Default into a 
-                            “Risky” class (~13.4%), I improved the F1-score to 0.85, demonstrating the importance of 
+                            “Risky” class (~13.4%), We improved the F1-score , demonstrating the importance of 
                             strategic class design for imbalanced datasets.
                         </li>
 
@@ -85,19 +85,13 @@
                             and improved balance, reflected by higher macro F1.
                         </li>
 
-                        <li>
-                            <strong>Code Integration Issues:</strong> When setting up Optuna in a new notebook, missing 
-                            imports (<code>DataLoader</code>, <code>MyNN</code>) caused <code>NameError</code> issues. 
-                            Resolving these through careful code structuring emphasized the importance of maintaining 
-                            consistent dependencies across files.
-                        </li>
+                       
                     </ul>
 
                     <p>
-                        <strong>Key Insights:</strong> Combining domain knowledge (merging classes for risk modeling), 
+                        <strong>Key Insights:</strong> Combining domain knowledge, 
                         robust preprocessing, and automated tuning with Optuna was critical to handling real-world data challenges. 
-                        Iterative debugging and experimentation led to strong performance (~96% accuracy, ~0.94 macro F1) 
-                        and a production-ready pipeline.
+                        Iterative debugging and experimentation led to strong performance.
                     </p>
                 </section>
 
