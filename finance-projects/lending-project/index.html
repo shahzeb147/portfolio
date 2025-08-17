@@ -26,84 +26,80 @@
                     </header>
                 </section>
 
-                <!-- Summary -->
-  <section>
-    <header class="main">
-        <h2>1) Project Summary</h2>
-    </header>
+                <!-- Project Summary (with Challenges & Insights inside) -->
+                <section>
+                    <header class="main">
+                        <h2>1) Project Summary</h2>
+                    </header>
 
-    <p>
-        This project applies a neural network to predict loan repayment outcomes 
-        (<strong>Paid, Current, Risky</strong>) using real LendingClub data. 
-        The pipeline includes data preprocessing, feature engineering, and class imbalance handling 
-        with weighted loss functions. The model was trained and evaluated in PyTorch, achieving 
-        <strong>~96% overall accuracy</strong> and a <strong>macro F1-score of ~0.94</strong>, 
-        with strong detection of high-risk loans.
-    </p>
+                    <p>
+                        This project applies a neural network to predict loan repayment outcomes 
+                        (<strong>Paid, Current, Risky</strong>) using real LendingClub data. 
+                        The pipeline includes data preprocessing, custom feature engineering, and class-imbalance handling 
+                        with weighted loss functions. The model was trained and evaluated in PyTorch, achieving 
+                        <strong>~96% overall accuracy</strong> and a <strong>macro F1-score of ~0.94</strong>, 
+                        with strong detection of high-risk loans.
+                    </p>
 
-    <p>
-        To further improve performance, I integrated <strong>Optuna</strong>, an automated 
-        hyperparameter optimization framework. By tuning learning rate, dropout, batch size, 
-        and optimizer choice, the model achieved more balanced results across all three classes, 
-        particularly boosting the <em>Risky</em> category.
-    </p>
+                    <p>
+                        To further improve performance, I integrated <strong>Optuna</strong>, an automated 
+                        hyperparameter optimization framework. By tuning learning rate, dropout, batch size, 
+                        optimizer choice, weight decay, and hidden width, the model achieved more balanced results 
+                        across all three classes, particularly boosting the <em>Risky</em> category.
+                    </p>
 
-    <ul class="actions">
-        <li><a href="../../projects.html" class="button">← Back to Projects</a></li>
-        <li><a href="https://github.com/shahzeb147/Machine-Learning/tree/main/credit%20loan%20project" class="button primary" target="_blank">View on GitHub</a></li>
-    </ul>
-</section>
+                    <ul class="actions">
+                        <li><a href="../../projects.html" class="button">← Back to Projects</a></li>
+                        <li><a href="https://github.com/shahzeb147/Machine-Learning/tree/main/credit%20loan%20project" class="button primary" target="_blank">View on GitHub</a></li>
+                    </ul>
 
+                    <h3>Challenges and Insights</h3>
 
-                <!-- Project Motivation -->
-                <<section>
-  <header class="main">
-    <h2>Challenges and Insights</h2>
-  </header>
+                    <p>
+                        Throughout the development of this credit risk classification model, several challenges arose that required creative problem-solving and iterative refinement:
+                    </p>
 
-  <p>
-    Throughout the development of this credit risk classification model, several challenges arose that required creative problem-solving and iterative refinement:
-  </p>
+                    <ul>
+                        <li>
+                            <strong>Class Imbalance in Delinquent Loans:</strong> Initially, a 4-class model 
+                            (Paid, Current, Delinquent, Charged Off/Default) struggled with the Delinquent class (~1.5% of data), 
+                            achieving a low F1-score of ~0.15. By merging Delinquent with Charged Off/Default into a 
+                            “Risky” class (~13.4%), I improved the F1-score to 0.85, demonstrating the importance of 
+                            strategic class design for imbalanced datasets.
+                        </li>
 
-  <ul>
-    <li>
-      <strong>Class Imbalance in Delinquent Loans:</strong> Initially, a 4-class model 
-      (Paid, Current, Delinquent, Charged Off/Default) struggled with the Delinquent class (~1.5% of data), 
-      achieving a low F1-score of ~0.15. By merging Delinquent with Charged Off/Default into a 
-      “Risky” class (~13.4%), I improved the F1-score to 0.85, demonstrating the importance of 
-      strategic class design for imbalanced datasets.
-    </li>
+                        <li>
+                            <strong>Data Preprocessing Errors:</strong> NaN values in the target variable 
+                            <code>loan_status_grouped</code> caused errors in the train–test split. Implementing robust 
+                            NaN checks and debugging unmapped <code>loan_status</code> values ensured data integrity, 
+                            reinforcing the need for thorough data validation.
+                            <br>
+                            <em>Note:</em> Although the code for specific treatments is largely self-explanatory, 
+                            individual column-wise transformations are documented in <code>key.xlsx</code>.
+                        </li>
 
-    <li>
-      <strong>Data Preprocessing Errors:</strong> NaN values in the target variable 
-      (<code>loan_status_grouped</code>) caused errors in the train-test split. Implementing robust 
-      NaN checks and debugging unmapped <code>loan_status</code> values ensured data integrity, 
-      reinforcing the need for thorough data validation.
-    </li>
+                        <li>
+                            <strong>Hyperparameter Tuning Complexity:</strong> Manual tuning of the neural network was 
+                            time-consuming. Adopting Optuna for automated hyperparameter optimization (e.g., number of layers, 
+                            neurons per layer, learning rate, dropout, batch size, optimizer, weight decay) streamlined the process 
+                            and improved balance, reflected by higher macro F1.
+                        </li>
 
-    <li>
-      <strong>Hyperparameter Tuning Complexity:</strong> Manual tuning of the neural network was 
-      time-consuming. Adopting Optuna for automated hyperparameter optimization (e.g., layers, 
-      neurons, learning rate) streamlined the process, potentially boosting macro F1 beyond 0.91, 
-      highlighting the power of systematic optimization.
-    </li>
+                        <li>
+                            <strong>Code Integration Issues:</strong> When setting up Optuna in a new notebook, missing 
+                            imports (<code>DataLoader</code>, <code>MyNN</code>) caused <code>NameError</code> issues. 
+                            Resolving these through careful code structuring emphasized the importance of maintaining 
+                            consistent dependencies across files.
+                        </li>
+                    </ul>
 
-    <li>
-      <strong>Code Integration Issues:</strong> When setting up Optuna in a new notebook, missing 
-      imports (<code>DataLoader</code>, <code>MyNN</code>) caused <code>NameError</code> issues. 
-      Resolving these through careful code structuring emphasized the importance of maintaining 
-      consistent dependencies across files.
-    </li>
-  </ul>
-
-  <p>
-    <strong>Key Insights:</strong> This project underscored the value of combining domain knowledge 
-    (merging classes for risk modeling), robust preprocessing, and advanced tools like Optuna to tackle 
-    real-world data challenges. Iterative debugging and experimentation were critical to achieving 
-    strong performance (~96% accuracy, ~0.94 macro F1) and building a production-ready model.
-  </p>
-</section>
-
+                    <p>
+                        <strong>Key Insights:</strong> Combining domain knowledge (merging classes for risk modeling), 
+                        robust preprocessing, and automated tuning with Optuna was critical to handling real-world data challenges. 
+                        Iterative debugging and experimentation led to strong performance (~96% accuracy, ~0.94 macro F1) 
+                        and a production-ready pipeline.
+                    </p>
+                </section>
 
             </div>
         </div>
