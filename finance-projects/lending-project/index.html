@@ -56,23 +56,54 @@
 
 
                 <!-- Project Motivation -->
-                <section>
-                    <header class="main">
-                        <h2>2) Project Motivation</h2>
-                    </header>
+                <<section>
+  <header class="main">
+    <h2>Challenges and Insights</h2>
+  </header>
 
-                    <p>
-                        Peer-to-peer lending has revolutionized the finance industry by allowing borrowers and investors to interact without traditional banks. However, the risk of loan default remains a significant concern. Financial institutions and investors alike need tools to assess borrower risk before issuing loans.
-                    </p>
+  <p>
+    Throughout the development of this credit risk classification model, several challenges arose that required creative problem-solving and iterative refinement:
+  </p>
 
-                    <p>
-                        Lending Club provides a rich dataset that mirrors real-world lending behavior, making it an ideal candidate for a machine learning project. My goal in this project was to apply neural networks to this dataset to accurately predict loan outcomes. This not only demonstrates how AI can support financial decision-making but also provides valuable insight into borrower behavior patterns.
-                    </p>
+  <ul>
+    <li>
+      <strong>Class Imbalance in Delinquent Loans:</strong> Initially, a 4-class model 
+      (Paid, Current, Delinquent, Charged Off/Default) struggled with the Delinquent class (~1.5% of data), 
+      achieving a low F1-score of ~0.15. By merging Delinquent with Charged Off/Default into a 
+      “Risky” class (~13.4%), I improved the F1-score to 0.85, demonstrating the importance of 
+      strategic class design for imbalanced datasets.
+    </li>
 
-                    <p>
-                        This project also serves as a showcase of my skills in handling real-world data, preprocessing, model building, and communicating insights clearly — qualities that are essential in a data science or quant role.
-                    </p>
-                </section>
+    <li>
+      <strong>Data Preprocessing Errors:</strong> NaN values in the target variable 
+      (<code>loan_status_grouped</code>) caused errors in the train-test split. Implementing robust 
+      NaN checks and debugging unmapped <code>loan_status</code> values ensured data integrity, 
+      reinforcing the need for thorough data validation.
+    </li>
+
+    <li>
+      <strong>Hyperparameter Tuning Complexity:</strong> Manual tuning of the neural network was 
+      time-consuming. Adopting Optuna for automated hyperparameter optimization (e.g., layers, 
+      neurons, learning rate) streamlined the process, potentially boosting macro F1 beyond 0.91, 
+      highlighting the power of systematic optimization.
+    </li>
+
+    <li>
+      <strong>Code Integration Issues:</strong> When setting up Optuna in a new notebook, missing 
+      imports (<code>DataLoader</code>, <code>MyNN</code>) caused <code>NameError</code> issues. 
+      Resolving these through careful code structuring emphasized the importance of maintaining 
+      consistent dependencies across files.
+    </li>
+  </ul>
+
+  <p>
+    <strong>Key Insights:</strong> This project underscored the value of combining domain knowledge 
+    (merging classes for risk modeling), robust preprocessing, and advanced tools like Optuna to tackle 
+    real-world data challenges. Iterative debugging and experimentation were critical to achieving 
+    strong performance (~96% accuracy, ~0.94 macro F1) and building a production-ready model.
+  </p>
+</section>
+
 
             </div>
         </div>
