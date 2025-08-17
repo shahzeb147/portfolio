@@ -27,24 +27,34 @@
                 </section>
 
                 <!-- Summary -->
-                <section>
-                    <header class="main">
-                        <h2>1)  Project Summary</h2>
-                    </header>
+               <section>
+    <header class="main">
+        <h2>1) Project Summary</h2>
+    </header>
 
-                    <p>
-                        This project uses a neural network to predict loan status (Fully Paid vs. Charged Off) using real Lending Club data. It includes preprocessing, feature engineering, model design using TensorFlow/Keras, and evaluation using AUC and precision-recall.
-                    </p>
+    <p>
+        This project applies a neural network to predict loan repayment outcomes 
+        (<strong>Paid, Current, Risky</strong>) using real LendingClub data. 
+        The pipeline includes data preprocessing, feature engineering, and class imbalance handling 
+        with weighted loss functions. The model was trained and evaluated in PyTorch, achieving 
+        <strong>~96% overall accuracy</strong> and a <strong>macro F1-score of ~0.94</strong>, 
+        with strong detection of high-risk loans.
+    </p>
 
-                    <p>
-                        The goal is to provide a reproducible, end-to-end machine learning pipeline that models credit risk using real-world borrower data. All code is available on GitHub.
-                    </p>
+    <p>
+        The goal was to build a robust, end-to-end machine learning workflow for credit risk analysis. 
+        Key steps included data cleaning, custom transformers for feature engineering, 
+        neural network model development, and performance evaluation. 
+        Results demonstrate the potential of deep learning methods in supporting 
+        financial decision-making by identifying risky borrowers effectively.
+    </p>
 
-                    <ul class="actions">
-                        <li><a href="../../projects.html" class="button">← Back to Projects</a></li>
-                        <li><a href="https://github.com/shahzeb147/lending-club-loan-status" class="button primary" target="_blank">View on GitHub</a></li>
-                    </ul>
-                </section>
+    <ul class="actions">
+        <li><a href="../../projects.html" class="button">← Back to Projects</a></li>
+        <li><a href="https://github.com/shahzeb147/lending-club-loan-status" class="button primary" target="_blank">View on GitHub</a></li>
+    </ul>
+</section>
+
 
                 <!-- Project Motivation -->
                 <section>
