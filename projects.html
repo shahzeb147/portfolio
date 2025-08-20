@@ -6,29 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <style>
-        #search-bar {
-            margin: 20px 0;
-        }
-
+        #search-bar { margin: 20px 0; }
         #searchInput {
             width: 100%;
             padding: 12px;
             font-size: 16px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 6px;
         }
-
-        .project-hidden {
-            display: none;
+        .project-hidden { display: none; }
+        .section-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 10px 0 24px;
         }
+        .section-nav a {
+            display: inline-block;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .section-nav a:hover { border-color: #bbb; }
+        section.project-section { margin-top: 36px; }
+        section.project-section header.main { margin-bottom: 10px; }
+        section.project-section p.section-desc { margin-top: 0; color: #666; }
+        .posts { row-gap: 2rem; }
     </style>
 </head>
 <body class="is-preload">
 
-    <!-- Wrapper -->
     <div id="wrapper">
-
-        <!-- Main -->
         <div id="main">
             <div class="inner">
 
@@ -37,45 +47,77 @@
                     <a href="index.html" class="logo"><strong>Shahzeb Ali</strong> Portfolio</a>
                 </header>
 
-                <!-- Content -->
+                <!-- Page Title -->
                 <section>
                     <header class="main">
                         <h1>Projects</h1>
                     </header>
 
-                    <p>Here is a list of my data science and machine learning projects. You can search below or click on a project to view more details.</p>
+                    <p>Explore my academic, personal, and ongoing work. Use the search to quickly find a project by keyword, topic, or title.</p>
+
+                    <!-- Section Jump Links -->
+                    <nav class="section-nav" aria-label="Project sections">
+                        <a href="#academic-projects">Academic Projects</a>
+                        <a href="#personal-projects">Personal Projects</a>
+                        <a href="#ongoing-projects">Ongoing Projects</a>
+                    </nav>
 
                     <!-- Search Bar -->
                     <div id="search-bar">
                         <input type="text" id="searchInput" placeholder="Search projects by keyword, topic, or title...">
                     </div>
 
-                    <!-- Project Cards -->
-                    <div class="posts" id="projectList">
+                    <!-- Academic Projects -->
+                    <section id="academic-projects" class="project-section">
+                        <header class="main">
+                            <h2>Academic Projects</h2>
+                        </header>
+                        <p class="section-desc">Research-driven projects, publications, and coursework-related work.</p>
+                        <div class="posts" id="projectListAcademic">
+                            <!-- Add academic project cards here -->
+                        </div>
+                    </section>
 
-                        <!-- Lending Club Project -->
-                        <article class="project-card">
-                            <a href="finance-projects/Credit Risk Classifer /index.html" class="image">
-                                <img src="images/lending.png" alt="Lending Club Project Thumbnail" />
-                            </a>
-                            <h3>Lending Club Loan Prediction</h3>
-                            <p>Using a neural network to predict loan status (fully paid vs. charged off) based on Lending Club borrower data. Includes preprocessing, training, and model evaluation.</p>
-                            <ul class="actions">
-                                <li><a href="finance-projects/lending-project/index.html" class="button">Read More</a></li>
-                            </ul>
-                        </article>
+                    <!-- Personal Projects -->
+                    <section id="personal-projects" class="project-section">
+                        <header class="main">
+                            <h2>Personal Projects</h2>
+                        </header>
+                        <p class="section-desc">Self-initiated experiments, tools, and fun builds.</p>
 
-                    </div>
+                        <div class="posts" id="projectListPersonal">
+                            <!-- Credit Risk Classifier Project -->
+                            <article class="project-card" data-category="personal">
+                                <a href="finance-projects/Credit Risk Classifer /index.html" class="image">
+                                    <img src="images/lending.png" alt="Credit Risk Classifier Thumbnail" />
+                                </a>
+                                <h3>Credit Risk Classifier</h3>
+                                <p>Neural network to predict loan status (Fully Paid vs. Charged Off) using Lending Club borrower data. Includes preprocessing, training, and model evaluation.</p>
+                                <ul class="actions">
+                                    <li><a href="finance-projects/lending-project/index.html" class="button">Read More</a></li>
+                                </ul>
+                            </article>
+                        </div>
+                    </section>
+
+                    <!-- Ongoing Projects -->
+                    <section id="ongoing-projects" class="project-section">
+                        <header class="main">
+                            <h2>Ongoing Projects</h2>
+                        </header>
+                        <p class="section-desc">Active work I’m currently building, refining, or writing up.</p>
+                        <div class="posts" id="projectListOngoing">
+                            <!-- Add ongoing project cards here -->
+                        </div>
+                    </section>
+
                 </section>
-
             </div>
         </div>
 
         <!-- Sidebar -->
         <div id="sidebar">
             <div class="inner">
-
-                <!-- Menu -->
                 <nav id="menu">
                     <header class="major">
                         <h2>Menu</h2>
@@ -88,14 +130,11 @@
                     </ul>
                 </nav>
 
-                <!-- Footer -->
                 <footer id="footer">
                     <p class="copyright">&copy; Shahzeb Ali. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
                 </footer>
-
             </div>
         </div>
-
     </div>
 
     <!-- Scripts -->
@@ -107,18 +146,21 @@
 
     <!-- Search Functionality -->
     <script>
-        document.getElementById("searchInput").addEventListener("keyup", function () {
-            var filter = this.value.toLowerCase();
-            var cards = document.querySelectorAll("#projectList .project-card");
-
-            cards.forEach(function (card) {
-                var text = card.innerText.toLowerCase();
-                if (text.includes(filter)) {
+        const searchInput = document.getElementById("searchInput");
+        function filterCards(query) {
+            const cards = document.querySelectorAll(".project-card");
+            const q = query.trim().toLowerCase();
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (!q || text.includes(q)) {
                     card.classList.remove("project-hidden");
                 } else {
                     card.classList.add("project-hidden");
                 }
             });
+        }
+        searchInput.addEventListener("keyup", function () {
+            filterCards(this.value);
         });
     </script>
 
