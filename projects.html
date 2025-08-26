@@ -35,13 +35,8 @@
     }
 
     /* Panels */
-    .tab-panel {
-      display: none;
-      padding-top: 12px;
-    }
-    .tab-panel.active {
-      display: block;
-    }
+    .tab-panel { display: none; padding-top: 12px; }
+    .tab-panel.active { display: block; }
 
     /* Search */
     #search-bar { margin: 14px 0 10px; }
@@ -54,7 +49,7 @@
     }
     .project-hidden { display: none; }
 
-    /* Optional tighter grid spacing (works with HTML5UP “Editorial” etc.) */
+    /* Optional tighter grid spacing */
     .posts { row-gap: 2rem; }
   </style>
 </head>
@@ -87,7 +82,7 @@
             <a href="#ongoing"   class="tab" role="tab" id="tab-ongoing"   aria-controls="panel-ongoing"   aria-selected="false">Ongoing Projects</a>
           </div>
 
-          <!-- Search (filters within the active tab) -->
+          <!-- Search -->
           <div id="search-bar">
             <input type="text" id="searchInput" placeholder="Search within this tab...">
           </div>
@@ -97,9 +92,9 @@
             <div class="posts" id="list-academic">
               
               <!-- Weighted Views Transformer (Academic) -->
-              <!-- Assumes: academic-projects/weighted-views-transformer/index.html exists -->
+              <!-- Using URL-encoded spaces because your folders/files include spaces -->
               <article class="project-card">
-                <a href="academic projects/weighted views transformer /index of weighted views transformer.html" class="image">
+                <a href="academic%20projects/weighted%20views%20transformer/index%20of%20weighted%20views%20transformer.html" class="image">
                   <img src="images/molecule.png" alt="Weighted Views Transformer Thumbnail" />
                 </a>
                 <h3>Weighted Views Transformer</h3>
@@ -107,7 +102,7 @@
                   Molecular featurization via weighted atomic views, transformer-based attention over atoms, and view-wise aggregation for property prediction (QM7/QM9 style).
                 </p>
                 <ul class="actions">
-                  <li><a href="academic projects/weighted views transformer /index of weighted views transformer.html" class="button">Read More</a></li>
+                  <li><a href="academic%20projects/weighted%20views%20transformer/index%20of%20weighted%20views%20transformer.html" class="button">Read More</a></li>
                 </ul>
               </article>
 
@@ -120,7 +115,6 @@
             <div class="posts" id="list-personal">
 
               <!-- Credit Risk Classifier (Personal) -->
-              <!-- If your folder has spaces, consider renaming it to a hyphenated slug and updating these links -->
               <article class="project-card">
                 <a href="finance-projects/credit-risk-classifier/index.html" class="image">
                   <img src="images/lending.png" alt="Credit Risk Classifier Thumbnail" />
@@ -130,7 +124,7 @@
                   Neural network to predict loan status (Fully Paid vs. Charged Off) using Lending Club borrower data. Includes preprocessing, training, and evaluation.
                 </p>
                 <ul class="actions">
-                  <li><a href="finance-projects/Credit Risk Classifer /index.html" class="button">Read More</a></li>
+                  <li><a href="finance-projects/credit-risk-classifier/index.html" class="button">Read More</a></li>
                 </ul>
               </article>
 
@@ -190,7 +184,6 @@
       const searchInput = document.getElementById('searchInput');
 
       function setActiveTabById(hash) {
-        // Default to #academic if no valid hash
         const target = (hash && ['#academic', '#personal', '#ongoing'].includes(hash)) ? hash : '#academic';
 
         tabs.forEach(tab => {
@@ -203,7 +196,6 @@
         const activePanel = document.getElementById(panelId);
         if (activePanel) activePanel.classList.add('active');
 
-        // Clear search when switching tabs
         searchInput.value = '';
         filterWithinActiveTab('');
       }
@@ -225,20 +217,8 @@
         });
       }
 
-      // Let hash navigation handle tab switching
-      tabs.forEach(tab => {
-        tab.addEventListener('click', function () {
-          // Use default anchor behavior; the hashchange listener will do the rest
-        });
-      });
-
-      // Listen to hash changes (supports deep-linking like /projects.html#personal)
       window.addEventListener('hashchange', () => setActiveTabById(location.hash));
-
-      // Initial load
       setActiveTabById(location.hash);
-
-      // Search within active tab
       searchInput.addEventListener('input', function () {
         filterWithinActiveTab(this.value);
       });
