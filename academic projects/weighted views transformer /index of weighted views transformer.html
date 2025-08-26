@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Weighted Views Transformer</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+</head>
+<body class="is-preload">
+
+    <div id="wrapper">
+
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+
+                <!-- Header -->
+                <header id="header">
+                    <a href="../../index.html" class="logo"><strong>Shahzeb Ali</strong> Portfolio</a>
+                </header>
+
+                <!-- Project Title -->
+                <section>
+                    <header class="main">
+                        <h1>Weighted Views Transformer</h1>
+                    </header>
+                </section>
+
+                <!-- Project Summary (with Challenges & Insights inside) -->
+                <section>
+                    <header class="main">
+                        <h2>Project Summary</h2>
+                    </header>
+
+                    <p>
+                        This project developed a Transformer-based pipeline in TensorFlow to predict molecular properties, achieving second-to-state-of-the-art performance on the QM7 dataset. I engineered a novel geometry-based featurization method to create robust molecular views, enabling a test MAE of 9.46. The pipeline leverages weighted views, atomic embeddings, and a customized Transformer Encoder to enhance feature association and prediction accuracy.
+                    </p>
+
+                    <p>
+                        To optimize performance, I conducted extensive hyperparameter tuning, exploring configurations of encoder blocks, attention dimensions, and feedforward layers. The model was trained on the Ohio Supercomputer Center’s Pitzer cluster, ensuring scalability for complex molecular data. Further results and algorithms will be published upon thesis release.
+                    </p>
+
+                    <ul class="actions">
+                        <li><a href="../../projects.html" class="button">← Back to Projects</a></li>
+                        <li><a href="https://github.com/shahzeb147/Weighted-Views-Transformer" class="button primary" target="_blank">View on GitHub</a></li>
+                    </ul>
+
+                    <h3>Challenges and Insights</h3>
+
+                    <p>
+                        Developing this molecular property prediction pipeline presented several challenges, addressed through innovative solutions:
+                    </p>
+
+                    <ul>
+                        <li>
+                            <strong>Variable-Sized Molecular Inputs:</strong> Molecules in the QM7 dataset vary in size, complicating Transformer input processing. I implemented zero-padding in the Transformer Encoder (<code>qm7_transformer_padded_zero.ipynb</code>), ensuring consistent input shapes while preserving feature integrity, significantly improving model robustness.
+                        </li>
+
+                        <li>
+                            <strong>Balancing View Weights:</strong> Initial models struggled with assigning appropriate weights to molecular views, leading to suboptimal predictions. By developing a geometry-based featurization method in <code>qm7_weightedviews.py</code>, I enhanced view relevance, boosting the model’s ability to capture molecular structures effectively.
+                        </li>
+
+                        <li>
+                            <strong>Hyperparameter Sensitivity:</strong> The Transformer’s performance was highly sensitive to parameters like <code>d_k</code>, <code>d_v</code>, and <code>d_ff</code>. Manual tuning was inefficient, so I systematically explored configurations (as shown in the README table), achieving a test MAE of 9.46 with <code>d_k=32</code>, <code>d_v=16</code>, <code>d_q=32</code>, <code>d_ff=64</code>, and 3 blocks.
+                        </li>
+                    </ul>
+
+                    <p>
+                        <strong>Key Insights:</strong> Combining geometry-based featurization with a Transformer architecture was pivotal for achieving high performance. Rigorous preprocessing, iterative experimentation, and leveraging high-performance computing resources were critical to overcoming real-world data challenges and rivaling state-of-the-art benchmarks.
+                    </p>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <div class="inner">
+                <nav id="menu">
+                    <header class="major"><h2>Menu</h2></header>
+                    <ul>
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../projects.html">Projects</a></li>
+                        <li><a href="../../resume.html">Resume</a></li>
+                        <li><a href="../../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <footer id="footer">
+                    <p class="copyright">&copy; Shahzeb Ali. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+                </footer>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/browser.min.js"></script>
+    <script src="../../assets/js/breakpoints.min.js"></script>
+    <script src="../../assets/js/util.js"></script>
+    <script src="../../assets/js/main.js"></script>
+
+</body>
+</html>
