@@ -33,11 +33,11 @@
                     </header>
 
                     <p>
-                        This project developed a Transformer-based pipeline in TensorFlow to predict molecular properties, achieving second-to-state-of-the-art performance on the QM7 dataset. I engineered a novel geometry-based featurization method to create robust molecular views, enabling a test MAE of 9.46. The pipeline leverages weighted views, atomic embeddings, and a customized Transformer Encoder to enhance feature association and prediction accuracy.
+                        This project developed a Transformer-based pipeline in TensorFlow to predict molecular properties, achieving second-to-state-of-the-art performance on the QM7 dataset. We engineered a novel geometry-based featurization method to create robust molecular views, achieving a test MAE of 9.46. The pipeline leverages weighted views, atomic embeddings, and a customized Transformer Encoder to enhance feature association and prediction accuracy.
                     </p>
 
                     <p>
-                        To optimize performance, I conducted extensive hyperparameter tuning, exploring configurations of encoder blocks, attention dimensions, and feedforward layers. The model was trained on the Ohio Supercomputer Center’s Pitzer cluster, ensuring scalability for complex molecular data. Further results and algorithms will be published upon thesis release.
+                        To optimize performance, We conducted extensive hyperparameter tuning, exploring configurations of encoder blocks, attention dimensions, and feedforward layers. The model was trained on the Ohio Supercomputer Center’s Pitzer cluster, ensuring scalability for complex molecular data. Further results and algorithms will be published upon thesis release.
                     </p>
 
                     <ul class="actions">
@@ -48,26 +48,24 @@
                     <h3>Challenges and Insights</h3>
 
                     <p>
-                        Developing this molecular property prediction pipeline presented several challenges, addressed through innovative solutions:
+                        Developing this molecular property prediction pipeline presented several challenges:
                     </p>
 
                     <ul>
                         <li>
-                            <strong>Variable-Sized Molecular Inputs:</strong> Molecules in the QM7 dataset vary in size, complicating Transformer input processing. I implemented zero-padding in the Transformer Encoder (<code>qm7_transformer_padded_zero.ipynb</code>), ensuring consistent input shapes while preserving feature integrity, significantly improving model robustness.
+                            <strong>Variable-Sized Molecular Inputs:</strong> Molecules in the QM7 dataset vary in size, complicating Transformer input processing. We implemented zero-padding in the Transformer Encoder (<code>qm7_transformer_padded_zero.ipynb</code>), ensuring consistent input shapes while preserving feature integrity, significantly improving model robustness.
                         </li>
 
                         <li>
-                            <strong>Balancing View Weights:</strong> Initial models struggled with assigning appropriate weights to molecular views, leading to suboptimal predictions. By developing a geometry-based featurization method in <code>qm7_weightedviews.py</code>, I enhanced view relevance, boosting the model’s ability to capture molecular structures effectively.
+                            <strong>Balancing View Weights:</strong> Initial models struggled with assigning appropriate weights to molecular views, leading to suboptimal predictions. By developing a geometry-based featurization method in <code>qm7_weightedviews.py</code>, We enhanced view relevance, boosting the model’s ability to capture molecular structures effectively.
                         </li>
 
                         <li>
-                            <strong>Hyperparameter Sensitivity:</strong> The Transformer’s performance was highly sensitive to parameters like <code>d_k</code>, <code>d_v</code>, and <code>d_ff</code>. Manual tuning was inefficient, so I systematically explored configurations (as shown in the README table), achieving a test MAE of 9.46 with <code>d_k=32</code>, <code>d_v=16</code>, <code>d_q=32</code>, <code>d_ff=64</code>, and 3 blocks.
+                            <strong>Hyperparameter Sensitivity:</strong> The Transformer’s performance was highly sensitive to parameters like <code>d_k</code>, <code>d_v</code>, and <code>d_ff</code>. Manual tuning was inefficient, so We systematically explored configurations (as shown in the README table), achieving a test MAE of 9.46 with <code>d_k=32</code>, <code>d_v=16</code>, <code>d_q=32</code>, <code>d_ff=64</code>, and 3 blocks.
                         </li>
                     </ul>
 
-                    <p>
-                        <strong>Key Insights:</strong> Combining geometry-based featurization with a Transformer architecture was pivotal for achieving high performance. Rigorous preprocessing, iterative experimentation, and leveraging high-performance computing resources were critical to overcoming real-world data challenges and rivaling state-of-the-art benchmarks.
-                    </p>
+                    
                 </section>
 
             </div>
