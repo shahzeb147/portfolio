@@ -1,393 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume - Shahzeb's Portfolio</title>
-    <style>
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7f9;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, #2c3e50, #4a6491);
-            color: white;
-            padding: 30px 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-        }
-        
-        .logo a {
-            color: white;
-            text-decoration: none;
-        }
-        
-        .social-icons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .social-icons a {
-            color: white;
-            font-size: 24px;
-            transition: transform 0.3s;
-        }
-        
-        .social-icons a:hover {
-            transform: translateY(-3px);
-        }
-        
-        /* Main Content Styles */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 30px;
-        }
-        
-        .resume-section {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #4a6491;
-        }
-        
-        h2 {
-            color: #2c3e50;
-            margin: 25px 0 15px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #eaeaea;
-        }
-        
-        h3 {
-            color: #3a506b;
-            margin: 20px 0 10px;
-        }
-        
-        p, li {
-            margin-bottom: 10px;
-        }
-        
-        ul {
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
-        
-        li {
-            margin-bottom: 8px;
-        }
-        
-        strong {
-            color: #2c3e50;
-        }
-        
-        a {
-            color: #4a6491;
-            transition: color 0.3s;
-        }
-        
-        a:hover {
-            color: #2c3e50;
-        }
-        
-        /* Download Button Styles */
-        .download-container {
-            background: #e8f4fc;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: center;
-            border-left: 4px solid #4a6491;
-        }
-        
-        .download-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #4a6491, #2c3e50);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(74, 100, 145, 0.3);
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        
-        .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(74, 100, 145, 0.4);
-            background: linear-gradient(135deg, #2c3e50, #4a6491);
-        }
-        
-        .download-btn:active {
-            transform: translateY(1px);
-        }
-        
-        /* Sidebar Styles */
-        .sidebar {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .sidebar h2 {
-            font-size: 20px;
-        }
-        
-        .menu {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .menu li {
-            margin-bottom: 12px;
-        }
-        
-        .menu a {
-            display: block;
-            padding: 10px 15px;
-            background: #f5f7f9;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-        
-        .menu a:hover {
-            background: #4a6491;
-            color: white;
-        }
-        
-        /* Footer Styles */
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #7b8794;
-            font-size: 14px;
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 900px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
-            }
-        }
-        
-        /* Status message for download */
-        .status-message {
-            display: none;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            text-align: center;
-        }
-        
-        .success {
-            background: #e8f5e9;
-            color: #2e7d32;
-            border: 1px solid #c8e6c9;
-        }
-        
-        .error {
-            background: #ffebee;
-            color: #c62828;
-            border: 1px solid #ffcdd2;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="header-content">
-                <div class="logo">
-                    <a href="index.html">Shahzeb's Portfolio</a>
-                </div>
-                <div class="social-icons">
-                    <a href="https://www.linkedin.com/in/muhammad-shahzeb-ali-5bb365228/" target="_blank" aria-label="LinkedIn">📱</a>
-                    <a href="https://github.com/shahzeb147" target="_blank" aria-label="GitHub">💻</a>
-                </div>
-            </div>
-        </header>
+<div class="container">
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Resume Section -->
-            <div class="resume-section">
-                <h1>Shahzeb's Resume</h1>
-                
-                <p><strong>Name:</strong> Muhammad Shahzeb Ali</p>
-                <p><strong>Email:</strong> <a href="mailto:ma972121@ohio.edu">ma972121@ohio.edu</a></p>
-                <p><strong>Phone:</strong> +1 740 731 3308</p>
-                
-                <!-- Download Button with enhanced functionality -->
-                <div class="download-container">
-                    <p>Click the button below to download my resume</p>
-                    <a href="#" class="download-btn" id="downloadBtn">
-                        Download Resume (PDF)
-                    </a>
-                    <div id="statusMessage" class="status-message"></div>
-                </div>
-
-                <hr />
-
-                <h2>Education</h2>
-                <ul>
-                    <li><strong>Doctor of Philosophy, Mathematics</strong> — Ohio University, Athens, OH, USA <em>2021 – Expected May 2026</em></li>
-                    <li><strong>Master of Science, Statistics</strong> — International Islamic University, Islamabad, Pakistan <em>2019 – 2021</em></li>
-                    <li><strong>Bachelor of Science, Statistics</strong> — Quaid-i-Azam University, Islamabad, Pakistan <em>2014 – 2018</em></li>
-                </ul>
-
-                <h2>Projects</h2>
-
-                <h3>Hybrid Statistical-Deep Learning Time Series Model <span style="font-weight:400;">(2025 – Present)</span></h3>
-                <ul>
-                    <li><strong>Key Skills:</strong> TensorFlow, Transformer Architecture, GARCH Modeling, MLflow, Keras Tuner</li>
-                    <li>Designing an end-to-end pipeline that integrates a statistical GARCH model for volatility feature extraction with a Transformer encoder and MLP for temporal forecasting.</li>
-                    <li>Engineering a feature set by fusing raw inputs with conditional volatility to capture complex, non-linear market patterns.</li>
-                    <li>Implementing components in TensorFlow; tracking experiments with MLflow and tuning hyperparameters via Keras Tuner.</li>
-                </ul>
-
-                <h3>Credit Risk Classifier <span style="font-weight:400;">(2024 – 2025)</span></h3>
-                <ul>
-                    <li><strong>Key Skills:</strong> PyTorch, Optuna, Imbalanced Classification</li>
-                    <li>Built a PyTorch neural network to predict loan repayment status across 59 engineered features with robust preprocessing for class imbalance and missing values.</li>
-                    <li>Achieved <strong>96.69% accuracy</strong>, <strong>94.87% macro F1-score</strong>, and <strong>0.8928 F1-score</strong> on the high-risk class; optimized via Optuna.</li>
-                </ul>
-
-                <h2>Professional Experience</h2>
-
-                <h3>Graduate Research &amp; Teaching Assistant — Ohio University, Athens, OH, USA <span style="font-weight:400;">(2021 – Present)</span></h3>
-                <ul>
-                    <li><strong>Machine Learning Research:</strong> Conducted research on molecule featurization and transformer-based architectures for molecular property prediction; developed deep learning model design and implementation skills.</li>
-                    <li><strong>Instruction &amp; Leadership:</strong> Taught and designed curriculum for 8+ undergraduate courses in Calculus, Statistics, Probability, and Differential Equations (classes of 30+ students).</li>
-                    <li><strong>Data-Driven Instruction:</strong> Analyzed student performance data to identify knowledge gaps and adapt teaching strategies, improving overall comprehension and exam outcomes.</li>
-                </ul>
-
-                <h3>Instructor — Johns Hopkins University, Center for Talented Youth <span style="font-weight:400;">(Summers 2022 – 2025)</span></h3>
-                <ul>
-                    <li>Instructed accelerated courses in <em>Cryptology</em>, <em>Mathematics of Money</em>, and <em>Probability</em> for high-achieving students.</li>
-                    <li>Developed and delivered engaging course materials (lectures, problem sets, and exams) emphasizing practical applications of quantitative theory.</li>
-                </ul>
-            </div>
-
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <h2>Menu</h2>
-                <ul class="menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                
-                <h2>Quick Contact</h2>
-                <p><strong>Email:</strong> <a href="mailto:ma972121@ohio.edu">ma972121@ohio.edu</a></p>
-                <p><strong>Phone:</strong> +1 740 731 3308</p>
-                
-                <h2>Skills</h2>
-                <ul>
-                    <li>Machine Learning</li>
-                    <li>Deep Learning</li>
-                    <li>Statistical Analysis</li>
-                    <li>Python Programming</li>
-                    <li>Data Visualization</li>
-                </ul>
-            </div>
+```
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <a href="index.html">Shahzeb's Portfolio</a>
         </div>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/muhammad-shahzeb-ali-5bb365228/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/shahzeb147" target="_blank">GitHub</a>
+        </div>
+    </div>
+</header>
 
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2025 Shahzeb Ali. All rights reserved.</p>
-            
-        </footer>
+<div class="main-content">
+
+    <div class="resume-section">
+
+        <h1>Publications</h1>
+
+        <p>
+            This page contains a list of my dissertations, theses, and academic publications in the areas of machine learning, molecular machine learning, and artificial intelligence for scientific discovery.
+        </p>
+
+        <h2>Dissertations and Theses</h2>
+
+        <ul>
+
+            <li>
+                Ali, M. S.,
+                "<a href="https://etd.ohiolink.edu/acprod/odb_etd/etd/r/1501/10?clear=10&p10_accession_num=ohiou1772803778532704" target="_blank">
+                Featurization Methods for Molecular Machine Learning
+                </a>,"
+                Doctoral Dissertation, Department of Mathematics, Ohio University, 2026.
+            </li>
+
+            <li>
+                Ali, M. S.,
+                <em>[Master's Thesis Title]</em>,
+                Master's Thesis, Department of Statistics, International Islamic University Islamabad, 2021.
+            </li>
+
+            <li>
+                Ali, M. S.,
+                <em>[Bachelor's Thesis Title]</em>,
+                Bachelor's Thesis, Department of Statistics, Quaid-i-Azam University, 2018.
+            </li>
+
+        </ul>
+
+        <h2>Academic Research Papers</h2>
+
+        <ul>
+
+            <li>
+                Ali, M. S. and Mohlenkamp, M. J.,
+                "<a href="https://doi.org/10.26434/chemrxiv.15003481/v1" target="_blank">
+                Weighted Views Representation with Multi-Head Coulomb Attention for Molecular Property Prediction
+                </a>,"
+                ChemRxiv Preprint, Submitted to ACS Omega.
+            </li>
+
+            <li>
+                Ali, M. S. and Bano, R.,
+                "<a href="https://doi.org/10.26434/chemrxiv.15004047/v1" target="_blank">
+                Weighted Molecular Views with Global Attention Token
+                </a>,"
+                ChemRxiv Preprint, Submitted to Journal of Computational Chemistry.
+            </li>
+
+        </ul>
+
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const downloadBtn = document.getElementById('downloadBtn');
-            const statusMessage = document.getElementById('statusMessage');
-            
-            // Simulate download functionality
-            downloadBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Show downloading message
-                statusMessage.textContent = 'Downloading your resume...';
-                statusMessage.className = 'status-message success';
-                statusMessage.style.display = 'block';
-                
-                // Simulate download process
-                setTimeout(function() {
-                    // In a real scenario, this would point to the actual PDF file
-                    // For demonstration, we'll use a dummy link
-                    const link = document.createElement('a');
-                    link.href = 'msa_resume_2025.pdf'; // Your actual resume file
-                    link.download = 'Shahzeb_Ali_Resume.pdf';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    
-                    // Show success message
-                    statusMessage.textContent = 'Download completed successfully!';
-                }, 1500);
-            });
-            
-            // Handle cases where the file might not be available
-            window.addEventListener('error', function(e) {
-                if (e.target.tagName === 'A' && e.target.id === 'downloadBtn') {
-                    statusMessage.textContent = 'Error: Resume file not found. Please check the file path.';
-                    statusMessage.className = 'status-message error';
-                    statusMessage.style.display = 'block';
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+    <div class="sidebar">
+
+        <h2>Menu</h2>
+
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <h2>Contact</h2>
+
+        <p>
+            <strong>Email:</strong><br>
+            <a href="mailto:ma972121@ohio.edu">ma972121@ohio.edu</a>
+        </p>
+
+        <p>
+            <strong>LinkedIn:</strong><br>
+            <a href="https://www.linkedin.com/in/muhammad-shahzeb-ali-5bb365228/" target="_blank">
+            Profile
+            </a>
+        </p>
+
+        <p>
+            <strong>GitHub:</strong><br>
+            <a href="https://github.com/shahzeb147" target="_blank">
+            github.com/shahzeb147
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Muhammad Shahzeb Ali. All rights reserved.</p>
+</footer>
+```
+
+</div>
