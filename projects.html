@@ -7,37 +7,6 @@
   <link rel="stylesheet" href="assets/css/main.css" />
 
   <style>
-    /* Tabs */
-    .tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      border-bottom: 1px solid #e5e5e5;
-      margin: 8px 0 18px;
-    }
-    .tab {
-      appearance: none;
-      background: #f6f6f6;
-      border: 1px solid #ddd;
-      border-bottom: none;
-      padding: 10px 14px;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-      cursor: pointer;
-      font-size: 0.95rem;
-      text-decoration: none;
-      color: inherit;
-    }
-    .tab[aria-selected="true"] {
-      background: #fff;
-      border-color: #bbb;
-      font-weight: 600;
-    }
-
-    /* Panels */
-    .tab-panel { display: none; padding-top: 12px; }
-    .tab-panel.active { display: block; }
-
     /* Search */
     #search-bar { margin: 14px 0 10px; }
     #searchInput {
@@ -49,8 +18,47 @@
     }
     .project-hidden { display: none; }
 
-    /* Optional tighter grid spacing */
-    .posts { row-gap: 2rem; }
+    /* Section spacing */
+    .project-section {
+      margin-bottom: 3rem;
+    }
+    .project-section h2 {
+      border-bottom: 2px solid #f56a6a;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .posts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .posts article {
+      flex: 1 1 calc(50% - 1rem);
+      min-width: 280px;
+    }
+    .project-card .image {
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .project-card .image img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    .project-card h3 {
+      margin-bottom: 0.5rem;
+    }
+    .project-card p {
+      margin-bottom: 0.75rem;
+    }
+    .project-card .actions {
+      margin-top: 0.5rem;
+    }
+    @media screen and (max-width: 736px) {
+      .posts article {
+        flex: 1 1 100%;
+      }
+    }
   </style>
 </head>
 <body class="is-preload">
@@ -73,26 +81,19 @@
             <h1>Projects</h1>
           </header>
 
-          <p>Select a tab to view projects in that category.</p>
-
-          <!-- Tabs -->
-          <div class="tabs" role="tablist" aria-label="Project categories">
-            <a href="#academic" class="tab" role="tab" id="tab-academic" aria-controls="panel-academic" aria-selected="true">Academic Projects</a>
-            <a href="#personal"  class="tab" role="tab" id="tab-personal"  aria-controls="panel-personal"  aria-selected="false">Personal Projects</a>
-            <a href="#ongoing"   class="tab" role="tab" id="tab-ongoing"   aria-controls="panel-ongoing"   aria-selected="false">Ongoing Projects</a>
-          </div>
+          <p>Here are some of the projects I've worked on across different areas.</p>
 
           <!-- Search -->
           <div id="search-bar">
-            <input type="text" id="searchInput" placeholder="Search within this tab...">
+            <input type="text" id="searchInput" placeholder="Search projects...">
           </div>
 
-          <!-- Panels -->
-          <div id="panel-academic" class="tab-panel active" role="tabpanel" aria-labelledby="tab-academic">
+          <!-- Academic Projects Section -->
+          <div class="project-section" id="academic-section">
+            <h2>Academic Projects</h2>
             <div class="posts" id="list-academic">
-              
-              <!-- Weighted Views Transformer (Academic) -->
-              <!-- Using URL-encoded spaces because your folders/files include spaces -->
+
+              <!-- Weighted Views Transformer -->
               <article class="project-card">
                 <a href="academic projects/weighted views transformer /index.html" class="image">
                   <img src="images/molecule.png" alt="Weighted Views Transformer Thumbnail" />
@@ -111,10 +112,12 @@
             </div>
           </div>
 
-          <div id="panel-personal" class="tab-panel" role="tabpanel" aria-labelledby="tab-personal">
+          <!-- Personal Projects Section -->
+          <div class="project-section" id="personal-section">
+            <h2>Personal Projects</h2>
             <div class="posts" id="list-personal">
 
-              <!-- Credit Risk Classifier (Personal) -->
+              <!-- Credit Risk Classifier -->
               <article class="project-card">
                 <a href="finance-projects/credit-risk-classifier/index.html" class="image">
                   <img src="images/lending.png" alt="Credit Risk Classifier Thumbnail" />
@@ -131,9 +134,12 @@
             </div>
           </div>
 
-          <div id="panel-ongoing" class="tab-panel" role="tabpanel" aria-labelledby="tab-ongoing">
+          <!-- Ongoing Projects Section -->
+          <div class="project-section" id="ongoing-section">
+            <h2>Ongoing Projects</h2>
             <div class="posts" id="list-ongoing">
               <!-- Add ongoing project cards here -->
+              <p><em>More projects coming soon...</em></p>
             </div>
           </div>
 
@@ -154,7 +160,7 @@
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="projects.html">Projects</a></li>
-            <li><a href="resume.html">Resume</a></li>
+            <li><a href="papers.html">Publications</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </nav>
@@ -176,35 +182,13 @@
   <script src="assets/js/util.js"></script>
   <script src="assets/js/main.js"></script>
 
-  <!-- Tabs + Search Logic -->
+  <!-- Search Logic -->
   <script>
     (function () {
-      const tabs = document.querySelectorAll('.tab');
-      const panels = document.querySelectorAll('.tab-panel');
       const searchInput = document.getElementById('searchInput');
 
-      function setActiveTabById(hash) {
-        const target = (hash && ['#academic', '#personal', '#ongoing'].includes(hash)) ? hash : '#academic';
-
-        tabs.forEach(tab => {
-          const isActive = tab.getAttribute('href') === target;
-          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        });
-
-        panels.forEach(panel => panel.classList.remove('active'));
-        const panelId = 'panel-' + target.replace('#', '');
-        const activePanel = document.getElementById(panelId);
-        if (activePanel) activePanel.classList.add('active');
-
-        searchInput.value = '';
-        filterWithinActiveTab('');
-      }
-
-      function filterWithinActiveTab(query) {
-        const activePanel = document.querySelector('.tab-panel.active');
-        if (!activePanel) return;
-
-        const cards = activePanel.querySelectorAll('.project-card');
+      function filterAllProjects(query) {
+        const cards = document.querySelectorAll('.project-card');
         const q = (query || '').trim().toLowerCase();
 
         cards.forEach(card => {
@@ -217,10 +201,8 @@
         });
       }
 
-      window.addEventListener('hashchange', () => setActiveTabById(location.hash));
-      setActiveTabById(location.hash);
       searchInput.addEventListener('input', function () {
-        filterWithinActiveTab(this.value);
+        filterAllProjects(this.value);
       });
     })();
   </script>
